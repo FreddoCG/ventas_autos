@@ -1,0 +1,67 @@
+BackendBundle\Entity\Venta:
+    type: entity
+    table: venta
+    indexes:
+        fk_ventas_cliente_idx:
+            columns:
+                - cliente_id
+        fk_ventas_empleado1_idx:
+            columns:
+                - empleado_id
+        fk_ventas_auto1_idx:
+            columns:
+                - auto_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaVenta:
+            type: datetime
+            nullable: false
+            options:
+                default: CURRENT_TIMESTAMP
+            column: fecha_venta
+        observacion:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+    manyToOne:
+        auto:
+            targetEntity: Auto
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                auto_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        cliente:
+            targetEntity: Cliente
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cliente_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        empleado:
+            targetEntity: Empleado
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                empleado_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
